@@ -5,7 +5,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        pokemon:['PokemonSolid']
+        pokemon:['PokemonSolid'],
+        // Note: Jesus Christ ήθελε αντί για [] αυτάκια""....
+        typesfont:"'Press Start 2P'",
       },
       keyframes: {
         getBig: {

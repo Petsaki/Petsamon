@@ -7,6 +7,7 @@ function App() {
   const [pokemons, setPokemons] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const test = "Gotta catch them all!";
+  
 
   // NOTE: Αυτό κάνει το ίδιο με το κάτω αλλά στο onclick καλό το setPokemon
   // useEffect(() => {
