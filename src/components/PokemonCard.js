@@ -6,9 +6,8 @@ import PokemonType from "./PokemonType";
 
 const PokemonCard = ({ pokeInfo }) => {
   const [loading, setLoading] = useState(false);
-  const testing = "block";
-  const dispatch = useDispatch();
-
+ 
+  
   return (
     <div className="relative">
       <Link
@@ -16,7 +15,7 @@ const PokemonCard = ({ pokeInfo }) => {
       transition ease-out .4s
       group hover:scale-125 focus:scale-125 hover:z-20 focus:z-20
       `}
-        to={"/pokemon/" + pokeInfo?.name}
+        to={"/pokemon/" + pokeInfo.name}
       >
         {/* Note: Προσοχή επειδή έχει - το βλέπει σαν μεταβλητή το artwork και για αυτό το έκανα.
             Δες για Object property accessors γιατί */}
@@ -28,8 +27,9 @@ const PokemonCard = ({ pokeInfo }) => {
         group-focus:scale-[65%] group-focus:-translate-y-7"
         >
           <img
+            alt={pokeInfo.name}
             className={`w-36 fixImfg hidden` + (loading ? "flex" : "hidden")}
-            src={pokeInfo?.sprites?.other["official-artwork"].front_default}
+            src={pokeInfo.sprites.other["official-artwork"].front_default}
             onLoad={() => {
               setLoading(true);
             }}
@@ -38,12 +38,11 @@ const PokemonCard = ({ pokeInfo }) => {
         <div className="transition flex gap-4 absolute scale-[80%] bottom-5 opacity-0 group-hover:scale-[80%] group-hover:-translate-y-8
         group-focus:-translate-y-8 group-hover:opacity-100 group-focus:opacity-100">
           {pokeInfo.types.map((type, index) => {
-            console.log("mphkes?");
             return <PokemonType key={index} type={type} />;
           })}
         </div>
 
-        <PokeFont text={pokeInfo?.name} />
+        <PokeFont text={pokeInfo.name} />
       </Link>
 
       {/* <div
