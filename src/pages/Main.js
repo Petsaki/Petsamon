@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import PokeFont from "../components/PokeFont";
 import PokemonCard from "../components/PokemonCard";
-import PokemonList from "../components/PokemonList";
+ 
 import { letters } from "../constants";
 import { ReactComponent as SearchIcon } from "../images/search_black_24dp.svg";
 import { GetPokemonList } from "../state/reducers/pokemonAction";
@@ -12,7 +12,7 @@ import { pushPokemon } from "../state/reducers/pokemonsAction";
 
 const Main = () => {
   const [pokemons, setPokemons] = useState([]);
-  const test = "Gotta catch them all!";
+ 
   const dispatch = useDispatch();
   const pokemonList = useSelector((state) => state.PokemonList);
   const PokemonsList = useSelector((state) => state.Pokemons.data);
@@ -122,7 +122,7 @@ const Main = () => {
     <div className="bg-slate-200/80 min-h-screen">
       <Header />
       <div className="flex items-center justify-center my-8">
-        <PokeFont text={test} />
+        <PokeFont text={"Gotta catch them all!"} />
       </div>
 
       {/* <PokemonList /> */}

@@ -4,7 +4,7 @@ import { pushPokemon } from "../state/reducers/pokemonsAction";
 import PokemonCard from "./PokemonCard";
 
 const PokemonsList = () => {
-  const dispatch = useDispatch();
+ 
   const PokemonsList = useSelector((state) => state.Pokemons.data);
 
   // useEffect(() => {
@@ -14,14 +14,14 @@ const PokemonsList = () => {
   //       // dispatch(pushPokemon(data[pokemon]));
   //   }
   // }, []);
-
+ 
   return (
     <div className="pb-10 pt-6">
       {/* Note: Εδώ ήθελε grid γιατί ήταν ΠΟΛΎ πιο εύκολο από'τι το flex */}
       <div className="grid justify-center grid-cols-repeat gap-x-8 gap-y-9  m-8">
         {PokemonsList.length > 0
           ? PokemonsList.map((pokemon, index) => {
-              return <PokemonCard key={index} pokeInfo={pokemon} />;
+              return <PokemonCard key={pokemon.id} pokeInfo={pokemon} />;
             })
           : null}
       </div>

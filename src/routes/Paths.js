@@ -18,21 +18,19 @@ const Paths = () => {
         dispatch(pushPokemon(dataToJSON[i]));
       }
     }
-  }, []);
+  }, [dispatch]);
 
   return (
-    <div>
+    <BrowserRouter>
       {/* Note: Στην version 6 της React Router δεν χρειάζετε να βάζουμε το exact, ξέρει από μόνο του ποιο Route να διαλέξει! */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />}>
-            <Route path="/" element={<PokemonsList />} />
-            <Route path="/pokemon/:pokemon" element={<Pokemon />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+      <Routes>
+        <Route path="/" element={<Main />}>
+          <Route path="/" element={<PokemonsList />} />
+          <Route path="/pokemon/:pokemon" element={<Pokemon />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

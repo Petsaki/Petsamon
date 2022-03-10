@@ -4,7 +4,7 @@ import { letters } from '../constants';
 const PokeFont = ({text}) => {
   return (
     <div className="pokeFont first-letter:uppercase leading-none">
-          {text?.split("").map((letter, index) => {
+          {text.split("").map((letter, index) => {
             if (letters.includes(letter.toLowerCase())) {
               return (
                 <span key={index} className="z-10 text-xl relative leading-none">

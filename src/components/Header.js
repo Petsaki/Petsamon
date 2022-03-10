@@ -8,17 +8,17 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 const Header = () => {
   const [inputValue, setInputValue] = useState("");
 
-  const SearchPokemon = useSelector((state) => state.PokemonSearch.data);
+   
 
   const dispatch = useDispatch();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation().pathname;
 
   const getPokemon = (e) => {
     //Note: Για να μην σε πηγαίνει σε άλλο url το form onSubmit!!SOS
     e.preventDefault();
     dispatch(updatePokemon(inputValue));
-    if (location != "/") {
+    if (location !== "/") {
       navigate("/", { replace: true });
     }
   };
@@ -30,7 +30,7 @@ const Header = () => {
         {/* Note: Για να είναι στο κέντρο το search bar έχω βάλει αυτό και το navbar w-full */}
         <div className="w-full">
           <Link to={"/"}>
-            <img className="w-12 md:w-16" src={logo} />
+            <img alt="logo" className="w-12 md:w-16" src={logo} />
           </Link>
         </div>
         {/* Note: Μπορώ είτε να κάνω onSubmit ή Onclick στο button */}
