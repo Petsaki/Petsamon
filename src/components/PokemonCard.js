@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { letters } from "../constants";
-import { ReactComponent as Pikachu } from "../images/pikachu.svg";
-import { getPokemonInfo } from "../state/reducers/pokemonInfoAction";
 import PokeFont from "./PokeFont";
+import PokemonType from "./PokemonType";
 
 const PokemonCard = ({ pokeInfo }) => {
   const [loading, setLoading] = useState(false);
@@ -14,19 +12,19 @@ const PokemonCard = ({ pokeInfo }) => {
   return (
     <div className="relative">
       <Link
-        className={` bg-white flex flex-col items-center rounded-lg shadow-md shadow-slate-400/70 p-3
+        className={`cursor-default bg-white flex flex-col items-center rounded-lg shadow-md shadow-slate-400/70 p-3
       transition ease-out .4s
       group hover:scale-125 focus:scale-125 hover:z-20 focus:z-20
       `}
         to={"/pokemon/" + pokeInfo?.name}
-        onClick={() => {
-          dispatch(getPokemonInfo(pokeInfo));
-        }}
       >
         {/* Note: Προσοχή επειδή έχει - το βλέπει σαν μεταβλητή το artwork και για αυτό το έκανα.
             Δες για Object property accessors γιατί */}
+            <div className="absolute top-2 right-3 leading-none">
+              Legendary O
+            </div>
         <div
-          className="transition ease-out .4s group-hover:scale-[65%] group-hover:-translate-y-7
+          className="transition group-hover:scale-[65%] group-hover:-translate-y-7
         group-focus:scale-[65%] group-focus:-translate-y-7"
         >
           <img
@@ -36,6 +34,13 @@ const PokemonCard = ({ pokeInfo }) => {
               setLoading(true);
             }}
           />
+        </div>
+        <div className="transition flex gap-4 absolute scale-[80%] bottom-5 opacity-0 group-hover:scale-[80%] group-hover:-translate-y-8
+        group-focus:-translate-y-8 group-hover:opacity-100 group-focus:opacity-100">
+          {pokeInfo.types.map((type, index) => {
+            console.log("mphkes?");
+            return <PokemonType key={index} type={type} />;
+          })}
         </div>
 
         <PokeFont text={pokeInfo?.name} />

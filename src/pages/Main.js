@@ -34,7 +34,7 @@ const Main = () => {
   //Note: sessionStorage είναι ΙΔΙΟ (ΑΚΟΜΑ ΚΑΙ ΤΟ API) με την διαφορά ότι το sessionStorage διαγράφεται όταν κλείσει το tab or broswer
   useEffect(() => {
     console.log("Pokemons: " + PokemonsList.length);
-    if (!PokemonsList[0] == []) {
+    if (PokemonsList.length>0) {
       sessionStorage.setItem("pokemons-list", JSON.stringify(PokemonsList));
     }
   }, [PokemonsList]);

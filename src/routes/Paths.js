@@ -6,10 +6,8 @@ import Main from "../pages/Main";
 import NotFound from "../pages/NotFound";
 import Pokemon from "../pages/Pokemon";
 import { pushPokemon } from "../state/reducers/pokemonsAction";
-import CheckPokemon from "./CheckPokemon";
 
 const Paths = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,10 +26,8 @@ const Paths = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />}>
-          <Route index element={<PokemonsList />}/>
-            <Route element={<CheckPokemon />}>
-              <Route path="/pokemon/:pokemon" element={<Pokemon />} />
-            </Route>
+            <Route path="/" element={<PokemonsList />} />
+            <Route path="/pokemon/:pokemon" element={<Pokemon />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

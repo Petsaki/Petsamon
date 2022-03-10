@@ -4,6 +4,8 @@ const DefaultState = {
     errorMsg: "",
   };
   
+
+//   Note: Πλεον είναι useless αυτό το Reducer αλλά το κρατάω εάν το χρειαστώ στο μέλλον
 export const PokemonsReducer  = (state = DefaultState,action)=>{
     switch(action.type){
         case "PUSH":
