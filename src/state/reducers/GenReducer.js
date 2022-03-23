@@ -4,18 +4,19 @@ const DefaultState = {
   errorMsg: "",
 };
 
-const PokemonReducer = (state = DefaultState, action) => {
+const GenReducer = (state = DefaultState, action) => {
   switch (action.type) {
     case "POKEMON_LIST_LOADING":
       return {
-        ...state,
+        data: [],
         loading: true,
+        errorMsg: "",
       };
     case "POKEMON_LIST_SUCCESS":
       return {
-        ...state,
         loading: false,
         data: action.payload,
+        errorMsg: "",
       };
     case "POKEMON_LIST_FAIL":
       return {
@@ -28,4 +29,4 @@ const PokemonReducer = (state = DefaultState, action) => {
   }
 };
 
-export default PokemonReducer;
+export default GenReducer;

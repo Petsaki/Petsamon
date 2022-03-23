@@ -9,9 +9,27 @@
   font-family: 'PokemonSolid';
   src: local('PokemonSolid'), url(./fonts/Pokemon-font/Pokemon_Solid.ttf) format('truetype');
 }
+
+
+
 @layer components{
   .skeleton{
       @apply animate-pulse h-1/2 bg-slate-300 rounded-sm w-full;
+  }
+  .table-stats{
+    @apply w-full md:w-[350px] mx-auto mt-8 text-lg leading-8 font-semibold text-slate-800 last:border-b-2 last:border-slate-300/80 overflow-hidden;
+  }
+  .tr-stats{
+    @apply border-t-2 border-slate-300/80 flex gap-x-2 items-center justify-center py-[2px];
+  }
+  .th-stats{
+    @apply text-right w-full text-slate-600 text-base font-semibold;
+  }
+  .td-stats{
+    @apply text-left w-full;
+  }
+  .pagenate-style{
+    @apply hover:underline hover:text-sky-900/80 p-1 px-2;
   }
 }
 @layer utilities{
@@ -19,6 +37,9 @@
     font-family: 'PokemonSolid';
     -webkit-text-stroke: 1px #2a75bb;
     color:#ffcb05;
+  },
+  .font-border{
+    -webkit-text-stroke: 1px black;
   },
   .fixImfg{
     image-rendering: high-quality;

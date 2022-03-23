@@ -39,6 +39,7 @@ export const types = {
         borderB: 'border-b-[#789010]',
     },
     psychic:{
+        name: 'psychc',
         bg: 'bg-[#F85888]',
         borderT: 'border-t-[#F8C0B0]',
         borderB: 'border-b-[#906060]',
@@ -58,7 +59,8 @@ export const types = {
         borderT: 'border-t-[#D880B8]',
         borderB: 'border-b-[#483850]',
     },
-    fight:{
+    fighting:{
+        name: 'fight',
         bg: 'bg-[#C03028]',
         borderT: 'border-t-[#F08030]',
         borderB: 'border-b-[#484038]',

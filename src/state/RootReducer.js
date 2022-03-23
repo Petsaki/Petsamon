@@ -1,14 +1,20 @@
-import { combineReducers } from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
+import GenReducer from "./reducers/GenReducer";
 import { PokemonInfoReducer } from "./reducers/PokemonInfoReducer";
-import PokemonReducer from "./reducers/PokemonReducer";
-import { PokemonSearchReducer } from "./reducers/PokemonSearchReducer";
 import { PokemonsReducer } from "./reducers/PokemonsReducer";
+import storageSession from "redux-persist/lib/storage/session";
+import { PokedexReducer } from "./reducers/PokedexReducer";
 
-const RootReducer = combineReducers({
-    PokemonList: PokemonReducer,
-    PokemonSearch: PokemonSearchReducer,
-    Pokemons: PokemonsReducer,
-    PokemonInfo : PokemonInfoReducer,
+export const RootReducer = combineReducers({
+  Gen: GenReducer,
+  Pokedex: PokedexReducer,
+  Pokemons: PokemonsReducer,
+  PokemonInfo: PokemonInfoReducer,
 });
 
-export default RootReducer;
+export const persistConfig = {
+  key: "root",
+  storage: storageSession,
+  whitelist: ['Pokemons','Pokedex','PokemonInfo']
+};
+

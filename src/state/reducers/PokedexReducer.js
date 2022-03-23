@@ -1,12 +1,11 @@
 const DefaultState = {
-    loading: false,
-    data: "",
+    data: [],
     errorMsg: "",
   };
   
-export const PokemonSearchReducer  = (state = DefaultState,action)=>{
+export const PokedexReducer  = (state = DefaultState,action)=>{
     switch(action.type){
-        case "ADD":
+        case "POKEDEX":
             return {
                 ...state,
                 data: action.payload,

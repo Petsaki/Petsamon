@@ -4,18 +4,19 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { store } from "./state/store";
-import { BrowserRouter } from "react-router-dom";
-
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "./state/store";
 // SOS
 // Ψάξε για Note: , BugFix: και Feature: για τα comments!!!
 // SOS
 
 ReactDOM.render(
   <React.StrictMode>
-      <Provider store={store}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
         <App />
-      </Provider>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

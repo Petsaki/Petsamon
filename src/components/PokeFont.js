@@ -7,7 +7,7 @@ const PokeFont = ({text}) => {
           {text.split("").map((letter, index) => {
             if (letters.includes(letter.toLowerCase())) {
               return (
-                <span key={index} className="z-10 text-xl relative leading-none">
+                <span key={index} className="text-xl relative leading-none">
                   {letter}
                 </span>
               );
