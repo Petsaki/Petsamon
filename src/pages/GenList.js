@@ -5,8 +5,8 @@ import PokemonCard from "../components/PokemonCard";
 import { GetGenList } from "../state/action/genAction";
 import { updatePokedex } from "../state/action/pokedexAction";
 import { ReactComponent as Pikachu } from "../images/pikachu.svg";
-import ReactPaginate from "react-paginate";
 import suprise_pikachu from "../images/suprise_pikachu_face.png";
+import Paginate from "../components/Paginate";
 
 const GenList = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,6 @@ const GenList = () => {
   const Pokedex = useSelector((state) => state.Pokedex.data);
   const [searchParams,setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get('page') || '';
-  const [atPage,setAtPage] = useState(0);
   const GenList = useSelector((state) => state.Gen);
   const locationNumber =
     Number(useLocation().pathname.split("/")[1].slice(-1)) + 1;
@@ -42,7 +41,7 @@ const GenList = () => {
       //BugFix: Πρέπει να κάνω αλλού το updatePokedex ή να κοιτάει εάν ο χρήστης είναι στο ίδιο url να μην το καλώ
       // BugFixed: Κάνω έλεγχο με if για εάν είναι ακόμη στο ίδιο gen!
       dispatch(updatePokedex(data));
-      setAtPage(0);
+
     }
 
     // BugFix: Αυτό να το αποθηκεύω στο sessionStorage αλλά δεν ξέρω πόσο θα δουλεύει, γενικά κάνω μεγάλη σπατάλη γιατί συνέχεια καλεί στο API.
@@ -54,12 +53,11 @@ const GenList = () => {
     
   };
   
-  const testingFun = (event) => {
-    console.log(event.selected + 1)
-    const page = event.selected + 1
+  const changePage = (event) => {
+    const page = event
     setSearchParams({page});
-    setAtPage(event.selected)
-    dispatch(GetGenList(event.selected + 1))
+    window.scrollTo(0, 0);
+    dispatch(GetGenList(event))
   }
 
   const ShowData = () => {
@@ -149,31 +147,15 @@ const GenList = () => {
       <div className="grid justify-center grid-cols-repeat gap-x-4 gap-y-5  m-3 sm:gap-x-8 sm:gap-y-9  sm:m-8">
         {ShowData()}
       </div>
-      
-      {Pokedex.pokemon_entries?.length > 0 && (
-        <ReactPaginate className={` flex-row items-center bg-sky-400 font-bold text-white text-lg rounded-md shadow-md shadow-sky-600/75 px-4 w-fit mx-auto mt-10 justify-center  ${GenList.loading ? "hidden" : "flex" }`}
-        pageCount={Math.ceil(Pokedex.pokemon_entries.length / 20)}
-        // Note: Πόσες pages να δείχνει δίπλα από το page που είναι
-        pageRangeDisplayed={2}
-        // Note: Πόσες pages να δείχνει στα άκρα
-        marginPagesDisplayed={1}
-        onPageChange={testingFun}
-        previousLabel="&#129128;" 
-        nextLabel="&#129130;"
-
-        activeClassName=" font-extrabold scale-110 bg-sky-600/80 rounded-sm"
-        pageLinkClassName= "pagenate-style"
-        breakLinkClassName="pagenate-style"
-
-        previousLinkClassName={`pagenate-style hidden sm:block sm:mr-6`}
-        nextLinkClassName={`pagenate-style  hidden sm:block sm:ml-6`}
-        
-        nextClassName=""
-        previousClassName=""
-        forcePage={searchTerm - 1}            
-      />
-      )}
-          
+     {Pokedex.pokemon_entries?.length > 0 && (
+       <Paginate
+       pageCount={Math.ceil(Pokedex.pokemon_entries.length / 20)}
+       fetchFun={changePage}
+       currentPage={searchTerm}
+       marginPages={1}
+       sidePagesFromCurrent={1}
+       />
+     )}     
      
     </div>
   );

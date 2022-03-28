@@ -139,14 +139,14 @@ const Header = () => {
   // });
 
   return (
-    <header className=" bg-sky-300 overflow-y-hidden shadow-lg shadow-slate-400/60 sticky z-50 top-0">
+    <header className=" bg-sky-400 overflow-y-hidden shadow-lg shadow-slate-400/60 sticky z-50 top-0">
       <div className="py-1 grid grid-rows-[50px,50px] grid-cols-4 sm:gap-x-4 sm:flex items-center justify-between max-w-7xl mx-5 lg:mx-10 xl:mx-auto">
 
         {/* ----------------------- Icon --------------------------------------------------- */}
 
         {/* Note: Για να κάνω black την εικόνα κάνω filter brightness-0 */}
         {/* Note: Για να είναι στο κέντρο το search bar έχω βάλει αυτό και το navbar w-full */}
-        <div className="w-full row-start-1 col-start-1 row-end-2 col-end-2">
+        <div className="sm:flex-1  row-start-1 col-start-1 row-end-2 col-end-2">
           {/* Note: Είχε θέμα με το Link και έπιανα το w-full και έβαλα το κάτω div για να το περιορίσω στο width του img */}
           <div className="w-fit">
             <Link to={"/"}>
@@ -162,7 +162,7 @@ const Header = () => {
         {/* <form  className="flex items-center m-5 gap-5"> */}
         <form
           onSubmit={(e) => getPokemon(e)}
-          className="flex items-center justify-center w-full mx-auto sm:w-full max-w-xs min-w-[200px] relative row-start-2 col-start-1 row-end-3 col-end-5 "
+          className=" items-center justify-center sm:flex sm:flex-1 mx-auto max-w-xs min-w-[230px] relative row-start-2 col-start-1 row-end-3 col-end-5 "
         >
           {/* Note: Κάνει submit επειδή είναι μόνο ένα text, εάν ήταν δύο++ δεν θα έκανε κάτι */}
           <input
@@ -190,35 +190,35 @@ const Header = () => {
 
 
         {/* ----------------------- NavBar --------------------------------------------------- */}
-        <nav className="w-full text-white font-bold whitespace-nowrap row-start-1 col-start-2 row-end-2 col-end-5">
-          <ul className="flex justify-evenly sm:justify-end flex-col-reverse gap-y-1 md:flex-row md:gap-x-7">
-            <div className="flex justify-end gap-x-3 lg:gap-x-3">
+        <nav className="sm:flex-1 text-white font-bold py-2 whitespace-nowrap row-start-1 col-start-2 row-end-2 col-end-5">
+          <ul className="flex justify-end flex-wrap flex-col-reverse xl:flex-row gap-y-1 md:gap-x-7">
+            <div className="flex justify-end gap-x-2">
               <li>
-                <Link className="" id="gen1" to={"/gen1?page=1"} >
+                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen1" ? "bg-sky-600/80 " : null} hover:bg-sky-500/80 `} id="gen1" to={"/gen1?page=1"} >
                   Gen 1
                 </Link>
               </li>
               <li>
-                <Link className="" id="gen2" to={"/gen2?page=1"} >
+                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen2" ? "bg-sky-600/80 " : null} hover:bg-sky-500/80 `} id="gen2" to={"/gen2?page=1"} >
                   Gen 2
                 </Link>
               </li>
               <li>
-                <Link className="" id="gen3" to={"/gen3?page=1"} >
+                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen3" ? "bg-sky-600/80 " : null} hover:bg-sky-500/80 `} id="gen3" to={"/gen3?page=1"} >
                 {/* <Link className="" id="gen3" to={"/gen3"} onClick={(e)=> checkgenUrl(e)}> */}
                   Gen 3
                 </Link>
               </li>
             </div>
 
-            <div className="flex justify-end gap-x-3 lg:gap-x-3">
+            <div className="flex justify-end gap-x-2 ">
               <li>
-                <a className="text-lime-500" href="">
+                <a className="text-lime-500 p-1 hover:bg-sky-500/80  rounded-md" href="">
                   Favourite
                 </a>
               </li>
               <li>
-                <a className="text-rose-600" href="">
+                <a className="text-rose-600 p-1 hover:bg-sky-500/80  rounded-md" href="">
                   Sing Out
                 </a>
               </li>

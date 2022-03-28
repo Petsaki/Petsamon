@@ -29,7 +29,7 @@ const Main = () => {
 
   return (
     // BugFix: Μεγάλο θέμα με τα re-rendering. Φταίει το z-index!! Δες στο PokemonCard και Header
-    <div className="bg-slate-200/80 min-h-screen sm:pb-6">
+    <div className="bg-slate-200/80 min-h-screen pb-2 sm:pb-6">
       <Header />
       <div className="flex items-center justify-center my-8">
         <PokeFont text={"Gotta catch them all!"} />

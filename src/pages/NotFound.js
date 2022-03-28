@@ -6,6 +6,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   useEffect(()=>{
+    // BugFix: Τρώει σκάλομα μερικές φορές και όταν πάει πίσω το κάνει 100 φορές 
     // Note: Το window ακούει πότε ο χρήστης πατάει να πάει πίσω
     window.onpopstate = e => {
       //Note: Πάω τον χρήστη ΔΎΟ σελίδες πίσω

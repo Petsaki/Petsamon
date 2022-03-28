@@ -7,16 +7,16 @@ import { useDispatch } from "react-redux";
 import { getPokemonInfo } from "../state/action/pokemonInfoAction";
 
 const PokemonCard = ({ pokeInfo }) => {
-  const [loading, setLoading] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
-  const testing ="block"
+  const testing ="hidden"
 
   return (
-    <div className="">
+    <div className="relative">
       <Link
       // Note: SUPER SOS SOS SOS το css will-change κάνει optimaze αυτό που θα πεις ότι κάνει το element π.χ. transform και έτσι σταμάτησε να κάνει άσκοπα re-renderings!!!
-        className={`relative will-change-transform
+        className={`will-change-transform
         cursor-pointer overflow-hidden bg-white flex flex-col items-center rounded-lg shadow-md shadow-slate-400/70 p-3
       transition ease-out .4s
       group hover:scale-110 focus:scale-110 sm:hover:scale-125 sm:focus:scale-125 hover:z-20 focus:z-20
@@ -33,10 +33,10 @@ const PokemonCard = ({ pokeInfo }) => {
             Δες για Object property accessors γιατί */}
           <img
             alt={pokeInfo.name}
-            className={`w-36 fixImfg hidden` + (loading ? "flex" : "hidden")}
+            className={`w-36 fixImfg hidden` + (loaded ? "hidden" : "flex")}
             src={pokeInfo.sprites.other["official-artwork"].front_default}
             onLoad={() => {
-              setLoading(true);
+              setLoaded(true);
             }}
           />
         </div>
@@ -54,8 +54,16 @@ const PokemonCard = ({ pokeInfo }) => {
         
       </Link>
 
+      <div
+        className={`${loaded ? "hidden" : "block" } bg-white border-white flex flex-col items-center border-[1.5px] rounded-lg shadow-lg shadow-gray-400 p-3 absolute top-0 left-0 w-full h-full z-10`}
+      >
+        <Pikachu className="w-36 animate-pulse" />
+        <div className="skeleton w-24 h-4 mt-4">
+        </div>
+      </div>
+
       {/* <div
-        className={` ${testing} bg-white border-white flex flex-col items-center border-[1.5px] rounded-lg shadow-lg shadow-gray-400 p-3 absolute top-0 left-0 w-full h-full z-10`}
+        className={`${loaded ? "hidden" : "block" } bg-white border-white flex flex-col items-center border-[1.5px] rounded-lg shadow-lg shadow-gray-400 p-3 absolute top-0 left-0 w-full h-full z-10`}
       >
         <Pikachu className="w-36 animate-pulse" />
         <div className="skeleton w-24 h-4 mt-4">
