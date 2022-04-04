@@ -30,9 +30,9 @@ export const GetGenList = (page) => async (dispatch, getState) => {
 
     // const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/1`)
 
-    // BugFix: Μήπως έχει άλλη function για αυτό που κάνω(slice)
-    // BugFixed: Για κάποιο λόγο ΔΕΝ δίνει τα πόκεμον με την σωστή σειρά?!?!?! SOS-SOS-SOS
-    // Note: Με το promise.all γυρνάει στο τέλος όταν τελειώσει το fetch, μέσα στο Map κάνω return τα data
+    // Note: Μήπως έχει άλλη function για αυτό που κάνω(slice)
+    // BugFix: Για κάποιο λόγο ΔΕΝ δίνει τα πόκεμον με την σωστή σειρά (επειδή το http request δεν σου υπόσχετε ότι θα σου τα γυρίσει με την σειρά, ότι τελειώνει στο γυρνάει και ας ήταν και τελευταίω)
+    // BugFixed: Με το promise.all γυρνάει στο τέλος όταν τελειώσει το fetch, μέσα στο Map κάνω return τα data
     // και μετά το promise μου τα γυρνάει όλα ΜΕ ΤΗΝ ΣΕΊΡΑ ΠΟΥ ΠΡΈΠΕΙ.
     // BugFix: ενώ πετάει error στο promise , το map μετά συνεχίζει να κάνει fetching 
     await Promise.all(pokedex.pokemon_entries.slice((dataIndex  - perPage), dataIndex).map( async (pokemon) => {

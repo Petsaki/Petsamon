@@ -13,10 +13,9 @@ const Pokemon = () => {
   const [loading, setLoading] = useState(true);
   const PokemonsList = useSelector((state) => state.Pokemons.data);
   const GetPokemonInfo = useSelector((state) => state.PokemonInfo.data);
-  // BugFix: Δεν δουλεύει με το local storage γιατί δεν είναι το data που αποθηκεύω.
-  // Πρέπει να αλλάξω αυτό ή να αποθηκεύω στο local storage και το pokemonInfo(και να το αλλάξω στο PATHS)
 
   useLayoutEffect(() => {
+    window.scrollTo(0, 0)
     console.log(GetPokemonInfo.name);
     const pikoulino = PokemonsList.find(
       (pokemon) => pokemon.name === location[2]
@@ -25,7 +24,7 @@ const Pokemon = () => {
       setPokemonInfo(GetPokemonInfo);
     } else if (pikoulino) {
       setPokemonInfo(pikoulino);
-      // BugFix: Εδώ μπορώ να κάνω fetch εάν τελικά δεν το βρει κάπου!!!
+      // Note: Εδώ μπορώ να κάνω fetch εάν τελικά δεν το βρει κάπου!!!
     } else {
       navigate("/notfound");
     }
@@ -55,7 +54,7 @@ const Pokemon = () => {
 
   return (
     <div className="mx-auto max-w-screen-2xl ">
-      <div className="bg-white rounded-lg shadow-md shadow-slate-400/70 px-4 md:px-12 mx-2 sm:mx-6 ">
+      <div className="bg-white rounded-lg shadow-md shadow-slate-400/70 px-4 md:px-12 mx-1 sm:mx-6 ">
 
         {pokemonInfo && (
           <div className="flex flex-wrap">

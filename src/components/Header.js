@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "../images/epilektos_logo_white.png";
 import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as SearchIcon } from "../images/search_black_24dp.svg";
@@ -7,10 +7,17 @@ import { GetGenList } from "../state/action/genAction";
 import { pushPokemon } from "../state/action/pokemonsAction";
 import { ReactComponent as SearchIconBlack } from "../images/search_black_24dp.svg";
 import { updatePokedex } from "../state/action/pokedexAction";
+import axios from "axios";
+import Toast from "./Toast";
 
 const Header = () => {
   const [inputValue, setInputValue] = useState("");
   const PokemonsList = useSelector((state) => state.Pokemons.data);
+  const [errorMes,setErrorMes]= useState(false);
+  const errorToastTime = () => {
+    setTimeout(() => setErrorMes(false),4000);
+  }
+  const errorToastTime2 = useRef();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,25 +25,30 @@ const Header = () => {
 
   const getPokemon = (e) => {
     //Note: Για να μην σε πηγαίνει σε άλλο url το form onSubmit!!SOS
-    e.preventDefault();
-
+    e.preventDefault(); 
+    errorToastTime2.current = clearTimeout(errorToastTime2.current);
+    setErrorMes(false);
     const fetchData = async () => {
       if (!(inputValue === "") && !listOfPokemons().includes(inputValue)) {
-        const res = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${inputValue}`
-        );
-        const data = await res.json();
-
-        dispatch(pushPokemon(data));
+        await axios.get(`https://pokeapi.co/api/v2/pokemon/${inputValue}`)
+        .then (res => { return res.data})
+        .then (data => { dispatch(pushPokemon(data))})
+        .catch(error => {
+          console.log("ERROR");
+          setErrorMes(true)
+          // errorToastTime();
+          errorToastTime2.current = setTimeout(() => setErrorMes(false),4000);
+        })
+        
 
         console.log("pokemon on UseEffect: " + PokemonsList.length);
         // setPokemons((prevPokemon) => {
         //   // Note: Για να βάζω τα καινούργια αντικείμενα στην αρχή, αλλιώς [...prevPokemon, data]
         //   // BugFix: Για κάποιο λόγο επειδή βάζω το data στην αρχή, όταν κάνει load δείχνει την εικόνα του προηγούμενου pokemon και μετά του σωστού
         //   return [data, ...prevPokemon];
+        // BugFixed: Αυτό γινόταν λόγου ότι είχα κακό key και έβαλα άλλο :) (είχα το index) 
 
         // });
-        console.log(data);
       }
     };
 
@@ -91,7 +103,7 @@ const Header = () => {
   //       //   // Note: Για να βάζω τα καινούργια αντικείμενα στην αρχή, αλλιώς [...prevPokemon, data]
   //       //   // BugFix: Για κάποιο λόγο επειδή βάζω το data στην αρχή, όταν κάνει load δείχνει την εικόνα του προηγούμενου pokemon και μετά του σωστού
   //       //   return [data, ...prevPokemon];
-
+           // BugFixed: Αυτό γινόταν λόγου ότι είχα κακό key και έβαλα άλλο :) (είχα το index) 
   //       // });
   //       console.log(data);
   //     }
@@ -191,20 +203,23 @@ const Header = () => {
 
         {/* ----------------------- NavBar --------------------------------------------------- */}
         <nav className="sm:flex-1 text-white font-bold py-2 whitespace-nowrap row-start-1 col-start-2 row-end-2 col-end-5">
-          <ul className="flex justify-end flex-wrap flex-col-reverse xl:flex-row gap-y-1 md:gap-x-7">
+          <ul className="flex justify-end flex-wrap flex-col-reverse xl:flex-row gap-y-2 md:gap-x-7">
             <div className="flex justify-end gap-x-2">
               <li>
-                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen1" ? "bg-sky-600/80 " : null} hover:bg-sky-500/80 `} id="gen1" to={"/gen1?page=1"} >
+                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen1" ? "bg-sky-600/80 " : "hover:bg-sky-500/80 focus:bg-sky-500/80"} transition ease-out duration-200 `} id="gen1" to={"/gen1?page=1"}
+                onClick={()=> window.scrollTo(0, 0)} >
                   Gen 1
                 </Link>
               </li>
               <li>
-                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen2" ? "bg-sky-600/80 " : null} hover:bg-sky-500/80 `} id="gen2" to={"/gen2?page=1"} >
+                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen2" ? "bg-sky-600/80 " : "hover:bg-sky-500/80 focus:bg-sky-500/80"} transition ease-out duration-200`} id="gen2" to={"/gen2?page=1"}
+                onClick={()=> window.scrollTo(0, 0)} >
                   Gen 2
                 </Link>
               </li>
               <li>
-                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen3" ? "bg-sky-600/80 " : null} hover:bg-sky-500/80 `} id="gen3" to={"/gen3?page=1"} >
+                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen3" ? "bg-sky-600/80 " : "hover:bg-sky-500/80 focus:bg-sky-500/80"} transition ease-out duration-200`} id="gen3" to={"/gen3?page=1"} 
+                onClick={()=> window.scrollTo(0, 0)}>
                 {/* <Link className="" id="gen3" to={"/gen3"} onClick={(e)=> checkgenUrl(e)}> */}
                   Gen 3
                 </Link>
@@ -213,12 +228,12 @@ const Header = () => {
 
             <div className="flex justify-end gap-x-2 ">
               <li>
-                <a className="text-lime-500 p-1 hover:bg-sky-500/80  rounded-md" href="">
+                <a className="text-lime-500 p-1 hover:text-white hover:bg-lime-500 focus:text-white focus:bg-lime-500 rounded-md transition ease-out duration-200" href="">
                   Favourite
                 </a>
               </li>
               <li>
-                <a className="text-rose-600 p-1 hover:bg-sky-500/80  rounded-md" href="">
+                <a className="text-rose-600 p-1 hover:bg-rose-600 hover:text-white focus:bg-rose-600 focus:text-white  rounded-md transition ease-out duration-200" href="">
                   Sing Out
                 </a>
               </li>
@@ -226,6 +241,10 @@ const Header = () => {
           </ul>
         </nav>
       </div>
+      {errorMes && (
+        <Toast/>
+      )}
+      
     </header>
   );
 };

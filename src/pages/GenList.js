@@ -45,6 +45,8 @@ const GenList = () => {
     }
 
     // BugFix: Αυτό να το αποθηκεύω στο sessionStorage αλλά δεν ξέρω πόσο θα δουλεύει, γενικά κάνω μεγάλη σπατάλη γιατί συνέχεια καλεί στο API.
+    // Το θέλω μόνο όταν πατάει κάποιο πόκεμον να δει και μετά όταν πάει πίσω ξανακάνει fetch.
+    // BugFixed: Τελικά από μόνο του κάνει cashe τα δεδομένα
     if (searchTerm === ""){
       navigate("?page=1", { replace: true });
       dispatch(GetGenList(1))
@@ -83,21 +85,35 @@ const GenList = () => {
           </div>
         );
       }
-      return skeleton;
+      return(
+        <div className="grid justify-center grid-cols-repeat md:grid-cols-cards4small lg:grid-cols-cards4 xl:grid-cols-cards5 gap-x-4 gap-y-5  m-3 sm:gap-x-8 sm:gap-y-9  sm:m-8 md:gap-x-5 md:gap-y-6  lg:gap-x-8 lg:gap-y-9  lg:m-8">
+          {skeleton}
+        </div>
+      ) 
     }
 
     if (GenList.errorMsg !== "") {
-      return <div>
-        <img alt="suprice pikachu"  src={suprise_pikachu} />
+      return <div className="flex-col justify-center items-center">
+        <div className="" >
+        <img className="w-80 min-w-[220px] mx-auto" alt="suprice pikachu"  src={suprise_pikachu} />
+        </div>
         <h1 className="text-center text-lg font-semibold">{GenList.errorMsg}</h1>
       </div>
       
     }
 
     if (GenList.data.length > 0) {
-      return GenList.data.map((pokemon) => {
-        return <PokemonCard key={pokemon.id} pokeInfo={pokemon} />;
-      });
+      return (
+        <div className="grid justify-center grid-cols-repeat md:grid-cols-cards4small lg:grid-cols-cards4 xl:grid-cols-cards5 gap-x-4 gap-y-5  m-3 sm:gap-x-8 sm:gap-y-9  sm:m-8 md:gap-x-5 md:gap-y-6  lg:gap-x-8 lg:gap-y-9  lg:m-8">
+        {
+          GenList.data.map((pokemon) => {
+            return <PokemonCard key={pokemon.id} pokeInfo={pokemon} />;
+          })
+        }
+      </div>
+      )
+      
+
     }
 
 
@@ -143,10 +159,8 @@ const GenList = () => {
   }, []);
 
   return (
-    <div className="pb-10 pt-6 max-w-[1920px] mx-auto">
-      <div className="grid justify-center grid-cols-repeat gap-x-4 gap-y-5  m-3 sm:gap-x-8 sm:gap-y-9  sm:m-8">
+    <div className="pb-10 pt-6  mx-auto">
         {ShowData()}
-      </div>
      {Pokedex.pokemon_entries?.length > 0 && (
        <Paginate
        pageCount={Math.ceil(Pokedex.pokemon_entries.length / 20)}

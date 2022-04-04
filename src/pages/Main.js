@@ -29,6 +29,7 @@ const Main = () => {
 
   return (
     // BugFix: Μεγάλο θέμα με τα re-rendering. Φταίει το z-index!! Δες στο PokemonCard και Header
+    // BugFixed: Το έφτιαξα με το css will-change-transform
     <div className="bg-slate-200/80 min-h-screen pb-2 sm:pb-6">
       <Header />
       <div className="flex items-center justify-center my-8">
