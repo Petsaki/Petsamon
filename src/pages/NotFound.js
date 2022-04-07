@@ -24,7 +24,7 @@ const NotFound = () => {
 
   return (
     <div className='flex flex-col justify-center items-center'>
-      <p className='text-xl font-semibold'>Page doesn't found.</p>
+      <p className='text-xl font-semibold dark:text-white'>Page doesn't found.</p>
       <img className='w-96' alt='Not Found Pikachu' src={notFound_Pikachu}/>
       </div>
   )

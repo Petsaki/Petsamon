@@ -54,7 +54,7 @@ const Pokemon = () => {
 
   return (
     <div className="mx-auto max-w-screen-2xl ">
-      <div className="bg-white rounded-lg shadow-md shadow-slate-400/70 px-4 md:px-12 mx-1 sm:mx-6 ">
+      <div className="bg-white dark:bg-[#26282c] dark:shadow-none rounded-lg shadow-md shadow-slate-400/70 px-4 md:px-12 mx-1 sm:mx-6 ">
 
         {pokemonInfo && (
           <div className="flex flex-wrap">
@@ -75,7 +75,7 @@ const Pokemon = () => {
             {/* -------------------- POKEDEX TABLE -------------------------------------------- */}
             <div className="flex-grow min-w-full sm:min-w-[386px] mt-6 mb-4">
               {/* Note: τα h1,h2...,h6 είναι unstyled στην tailwind! */}
-              <h1 className="font-sans font-bold text-4xl flex justify-center">
+              <h1 className="font-sans font-bold text-4xl flex justify-center dark:text-white">
                 Pok&#233;dex data
               </h1>
               <table className="table-stats">
@@ -116,7 +116,7 @@ const Pokemon = () => {
                       <div>
                         {pokemonInfo.abilities.map((ability,index) =>{
                           if (ability.is_hidden){
-                            return <p key={index} className="text-base">{ability.ability.name} <span className="text-sm text-neutral-500">(hidden ability)</span></p>
+                            return <p key={index} className="text-base ">{ability.ability.name} <span className="text-sm text-neutral-500 dark:text-neutral-400">(hidden ability)</span></p>
                           }else{
                           return <p key={index}>{index + 1}. {ability.ability.name}</p>
                           }
@@ -134,7 +134,7 @@ const Pokemon = () => {
 
             <div className="flex-grow min-w-full md:min-w-[386px] mt-6 mb-4">
               {/* Note: τα h1,h2...,h6 είναι unstyled στην tailwind! */}
-              <h1 className="font-sans font-bold text-4xl flex justify-center">
+              <h1 className="font-sans font-bold text-4xl flex justify-center dark:text-white">
                 Base stats
               </h1>
               <table className="table-stats">

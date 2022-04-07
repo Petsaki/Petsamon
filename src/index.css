@@ -17,19 +17,19 @@
       @apply animate-pulse h-1/2 bg-slate-300 rounded-sm w-full;
   }
   .table-stats{
-    @apply w-full md:w-[350px] mx-auto mt-8 text-lg leading-8 font-semibold text-slate-800 last:border-b-2 last:border-slate-300/80 overflow-hidden;
+    @apply w-full md:w-[350px] mx-auto mt-8 text-lg leading-8 font-semibold text-slate-800 dark:text-white last:border-b-2 last:border-slate-300/80 last:dark:border-gray-600 overflow-hidden;
   }
   .tr-stats{
-    @apply border-t-2 border-slate-300/80 flex gap-x-2 items-center justify-center py-[2px];
+    @apply border-t-2 border-slate-300/80 dark:border-gray-600 flex gap-x-2 items-center justify-center py-[2px];
   }
   .th-stats{
-    @apply text-right w-full text-slate-600 text-base font-semibold;
+    @apply text-right w-full text-slate-600 dark:text-slate-300/90 text-base font-semibold;
   }
   .td-stats{
-    @apply text-left w-full;
+    @apply text-left w-full ;
   }
   .pagenate-style{
-    @apply hover:underline hover:text-sky-900/80 p-1 px-2;
+    @apply hover:underline hover:text-sky-900/80  p-1 px-2;
   }
 }
 @layer utilities{
@@ -37,16 +37,21 @@
     font-family: 'PokemonSolid';
     -webkit-text-stroke: 1px #2a75bb;
     color:#ffcb05;
-  },
+  }
+  .pokeFontDark{
+    font-family: 'PokemonSolid';
+    -webkit-text-stroke: 1px #000000;
+    color:#ffffff;
+  }
   .font-border{
     -webkit-text-stroke: 1px black;
-  },
+  }
   .fixImfg{
     image-rendering: high-quality;
-  },
+  }
   .filterskeleton{
     filter: invert(92%) sepia(7%) saturate(361%) hue-rotate(171deg) brightness(93%) contrast(89%);
-  },
+  }
   .typetextshadow{
     text-shadow: 4px 5px 0px #807870;
   }

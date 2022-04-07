@@ -1,19 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import logo from "../images/epilektos_logo_white.png";
 import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as SearchIcon } from "../images/search_black_24dp.svg";
+import { ReactComponent as LightIcon } from "../images/light_mode_black_24dp.svg";
+import { ReactComponent as DarkIcon } from "../images/dark_mode_black_24dp.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GetGenList } from "../state/action/genAction";
 import { pushPokemon } from "../state/action/pokemonsAction";
-import { ReactComponent as SearchIconBlack } from "../images/search_black_24dp.svg";
 import { updatePokedex } from "../state/action/pokedexAction";
 import axios from "axios";
 import Toast from "./Toast";
+import { ThemeContext } from "./ThemeProvider";
 
 const Header = () => {
   const [inputValue, setInputValue] = useState("");
   const PokemonsList = useSelector((state) => state.Pokemons.data);
   const [errorMes,setErrorMes]= useState(false);
+  const {theme,setTheme} = useContext(ThemeContext);
   const errorToastTime = () => {
     setTimeout(() => setErrorMes(false),4000);
   }
@@ -151,8 +154,8 @@ const Header = () => {
   // });
 
   return (
-    <header className=" bg-sky-400 overflow-y-hidden shadow-lg shadow-slate-400/60 sticky z-50 top-0">
-      <div className="py-1 grid grid-rows-[50px,50px] grid-cols-4 sm:gap-x-4 sm:flex items-center justify-between max-w-7xl mx-5 lg:mx-10 xl:mx-auto">
+    <header className=" bg-sky-400 dark:bg-neutral-900 dark:shadow-none overflow-y-hidden shadow-lg shadow-slate-400/60 sticky z-50 top-0">
+      <div className="py-1 grid grid-rows-[50px,50px] grid-cols-4 sm:gap-x-4 sm:flex items-center justify-between max-w-7xl mx-5 mt-3 sm:mt-0 lg:mx-10 xl:mx-auto">
 
         {/* ----------------------- Icon --------------------------------------------------- */}
 
@@ -178,7 +181,7 @@ const Header = () => {
         >
           {/* Note: Κάνει submit επειδή είναι μόνο ένα text, εάν ήταν δύο++ δεν θα έκανε κάτι */}
           <input
-            className="pl-1 w-full border-2 rounded-md hover:border-black z-10"
+            className="pl-1 w-full border-2 rounded-md hover:border-black z-10 dark:bg-[#26282c] dark:border-[#546076] dark:text-white"
             type="text"
             placeholder="Search for a pokemon!"
             // Note: Έτσι τα κάνει lower case στο input(στο chrome) γιατί αλλάζουμε το value στο inputValue
@@ -202,23 +205,24 @@ const Header = () => {
 
 
         {/* ----------------------- NavBar --------------------------------------------------- */}
-        <nav className="sm:flex-1 text-white font-bold py-2 whitespace-nowrap row-start-1 col-start-2 row-end-2 col-end-5">
+        <div className="flex justify-end gap-x-4 row-start-1 col-start-2 row-end-2 col-end-5 sm:flex-1">
+        <nav className=" text-white font-bold py-2 whitespace-nowrap ">
           <ul className="flex justify-end flex-wrap flex-col-reverse xl:flex-row gap-y-2 md:gap-x-7">
             <div className="flex justify-end gap-x-2">
               <li>
-                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen1" ? "bg-sky-600/80 " : "hover:bg-sky-500/80 focus:bg-sky-500/80"} transition ease-out duration-200 `} id="gen1" to={"/gen1?page=1"}
+                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen1" ? "bg-sky-600/80 dark:bg-[#393c41]  " : "hover:bg-sky-500/80 hover:dark:bg-[#26282c] focus:dark:dark:bg-[#26282c] focus:bg-sky-500/80"} transition ease-out duration-200 `} id="gen1" to={"/gen1?page=1"}
                 onClick={()=> window.scrollTo(0, 0)} >
                   Gen 1
                 </Link>
               </li>
               <li>
-                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen2" ? "bg-sky-600/80 " : "hover:bg-sky-500/80 focus:bg-sky-500/80"} transition ease-out duration-200`} id="gen2" to={"/gen2?page=1"}
+                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen2" ? "bg-sky-600/80 dark:bg-[#393c41] " : "hover:bg-sky-500/80 hover:dark:bg-[#26282c] focus:dark:dark:bg-[#26282c] focus:bg-sky-500/80"} transition ease-out duration-200`} id="gen2" to={"/gen2?page=1"}
                 onClick={()=> window.scrollTo(0, 0)} >
                   Gen 2
                 </Link>
               </li>
               <li>
-                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen3" ? "bg-sky-600/80 " : "hover:bg-sky-500/80 focus:bg-sky-500/80"} transition ease-out duration-200`} id="gen3" to={"/gen3?page=1"} 
+                <Link className={`p-1 rounded-md ${location.split("/")[1] === "gen3" ? "bg-sky-600/80 dark:bg-[#393c41] " : "hover:bg-sky-500/80 hover:dark:bg-[#26282c] focus:dark:dark:bg-[#26282c] focus:bg-sky-500/80"} transition ease-out duration-200`} id="gen3" to={"/gen3?page=1"} 
                 onClick={()=> window.scrollTo(0, 0)}>
                 {/* <Link className="" id="gen3" to={"/gen3"} onClick={(e)=> checkgenUrl(e)}> */}
                   Gen 3
@@ -226,7 +230,7 @@ const Header = () => {
               </li>
             </div>
 
-            <div className="flex justify-end gap-x-2 ">
+            <div className="flex justify-end gap-x-2">
               <li>
                 <a className="text-lime-500 p-1 hover:text-white hover:bg-lime-500 focus:text-white focus:bg-lime-500 rounded-md transition ease-out duration-200" href="">
                   Favourite
@@ -239,7 +243,17 @@ const Header = () => {
               </li>
             </div>
           </ul>
+
         </nav>
+        <label className="bg-white text-black font-bold rounded-full aspect-square   cursor-pointer flex justify-center items-center self-center focus:border-2 focus:border-orange-600">
+          <input className="opacity-0 w-0 h-0" type="checkbox" onClick={()=> setTheme(theme === "dark" ? "light" : "dark")}/>
+          <div className="active:translate-y-[1px] w-full h-full px-1 rounded-full flex items-center">
+          <span className="slider round active:translate-y-[1px]  leading-none rounded-full select-none self">{theme === "dark" ? <LightIcon className="fill-gray-500" /> :<DarkIcon/>}</span>
+          </div>
+          
+          
+        </label>
+        </div>
       </div>
       {errorMes && (
         <Toast/>

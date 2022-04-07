@@ -17,7 +17,7 @@ const PokemonCard = ({ pokeInfo }) => {
       <Link
       // Note: SUPER SOS SOS SOS το css will-change κάνει optimaze αυτό που θα πεις ότι κάνει το element π.χ. transform και έτσι σταμάτησε να κάνει άσκοπα re-renderings!!!
         className={`will-change-transform
-        cursor-pointer overflow-hidden bg-white flex flex-col items-center rounded-lg shadow-md shadow-slate-400/70 p-3
+        cursor-pointer overflow-hidden bg-white dark:bg-[#26282c] dark:shadow-none dark: flex flex-col items-center rounded-lg shadow-md shadow-slate-400/70 p-3
       transition ease-out .4s
       group  md:hover:scale-[115%] md:focus:scale-[115%] md:hover:z-20 md:focus:z-20 
       group  lg:hover:scale-125 lg:focus:scale-125 lg:hover:z-20 lg:focus:z-20 
@@ -56,7 +56,7 @@ const PokemonCard = ({ pokeInfo }) => {
       </Link>
 
       <div
-        className={`${loaded ? "hidden" : "block" } bg-white border-white flex flex-col items-center border-[1.5px] rounded-lg shadow-lg shadow-gray-400 p-3 absolute top-0 left-0 w-full h-full z-10`}
+        className={`${loaded ? "hidden" : "flex" } bg-white dark:bg-[#26282c]  flex-col items-center  rounded-lg shadow-lg shadow-gray-400 dark:shadow-none p-3 absolute top-0 left-0 w-full h-full z-10`}
       >
         <Pikachu className="w-36 animate-pulse" />
         <div className="skeleton w-24 h-4 mt-4">

@@ -3,7 +3,7 @@ import { letters } from '../constants';
 
 const PokeFont = ({text}) => {
   return (
-    <div className="pokeFont first-letter:uppercase leading-none">
+    <div className="pokeFont dark:pokeFontDark first-letter:uppercase leading-none">
           {text.split("").map((letter, index) => {
             if (letters.includes(letter.toLowerCase())) {
               return (

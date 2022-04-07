@@ -77,7 +77,7 @@ const GenList = () => {
         skeleton.push(
           <div
             key={i}
-            className={`bg-white border-white flex flex-col items-center
+            className={`bg-white dark:bg-[#26282c] dark:shadow-none flex flex-col items-center
         rounded-lg shadow-lg shadow-gray-400 p-3 z-10`}
           >
             <Pikachu className="h-[144px] animate-pulse" />
@@ -97,7 +97,7 @@ const GenList = () => {
         <div className="" >
         <img className="w-80 min-w-[220px] mx-auto" alt="suprice pikachu"  src={suprise_pikachu} />
         </div>
-        <h1 className="text-center text-lg font-semibold">{GenList.errorMsg}</h1>
+        <h1 className="text-center text-lg font-semibold dark:text-white">{GenList.errorMsg}</h1>
       </div>
       
     }

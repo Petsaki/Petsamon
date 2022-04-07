@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import PokeFont from "../components/PokeFont";
@@ -30,13 +30,16 @@ const Main = () => {
   return (
     // BugFix: Μεγάλο θέμα με τα re-rendering. Φταίει το z-index!! Δες στο PokemonCard και Header
     // BugFixed: Το έφτιαξα με το css will-change-transform
-    <div className="bg-slate-200/80 min-h-screen pb-2 sm:pb-6">
+    
+          <div className=" bg-slate-200/80 dark:bg-[#1d1d1d] min-h-screen pb-2 sm:pb-6">
       <Header />
       <div className="flex items-center justify-center my-8">
         <PokeFont text={"Gotta catch them all!"} />
       </div>
       <Outlet />
     </div>
+  
+
   );
 };
 
